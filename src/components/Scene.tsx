@@ -15,10 +15,11 @@ const Scene: React.FC = () => (
   position={[10, 10, 10]}
   zoom={50}
 />
-    <OrbitControls enablePan={true} enableZoom={false} maxPolarAngle={0} minPolarAngle={Math.PI/3} 
-  maxAzimuthAngle={Math.PI/4} minAzimuthAngle={-Math.PI/4}
-  enableRotate={false} 
+    <OrbitControls enablePan={true} enableZoom={true} maxPolarAngle={Math.PI/3} minPolarAngle={Math.PI/3} 
+  maxAzimuthAngle={Math.PI} minAzimuthAngle={-Math.PI}
+  enableRotate={true} 
     />
+    <axesHelper args={[6]} />
     <Room />
   </Canvas>
 );
