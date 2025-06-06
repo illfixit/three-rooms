@@ -112,6 +112,50 @@ const Room: React.FC = () => (
   <>
     {/* Animated Rain */}
     <Rain />
+{/* TABLE LAMP */}
+{/* Base */}
+<mesh position={[-1.3, 1.2, 1.8]}>
+  <cylinderGeometry args={[0.04, 0.04, 0.1, 16]} />
+  <meshStandardMaterial color="#444444" roughness={0.3} metalness={0.7} />
+</mesh>
+
+{/* Pole */}
+<mesh position={[-1.3, 1.3, 1.8]}>
+  <cylinderGeometry args={[0.01, 0.01, 0.15, 8]} />
+  <meshStandardMaterial color="#444444" roughness={0.3} metalness={0.7} />
+</mesh>
+
+{/* Shade */}
+<mesh position={[-1.3, 1.4, 1.8]}>
+  <coneGeometry args={[0.1, 0.12, 16, 1, true]} />
+  <meshStandardMaterial 
+    color={lampShade} 
+    side={THREE.DoubleSide}
+    emissive="#ffe285" 
+    emissiveIntensity={0.2}
+  />
+</mesh>
+
+{/* Light Bulb */}
+<mesh position={[-1.3, 1.4, 1.8]}>
+  <sphereGeometry args={[0.02, 8, 8]} />
+  <meshStandardMaterial 
+    color="#fff8dc"
+    emissive="#fff8dc"
+    emissiveIntensity={1.0}
+  />
+</mesh>
+
+{/* Point Light */}
+<pointLight
+  position={[-1.3, 1.35, 1.8]}
+  color="#ffe285"
+  intensity={0.8}
+  distance={3}
+  decay={2}
+  castShadow
+/>
+
 
     {/* Floor */}
     <mesh position={[0, 0, 0]} receiveShadow>
@@ -121,7 +165,7 @@ const Room: React.FC = () => (
     
     {/* Left Wall - Now just the FRAME parts around a large window */}
     {/* Top part of the frame */}
-    <mesh position={[0, SIZE - 0.35, -SIZE / 2]}>
+    <mesh position={[0, SIZE - 0.35, -SIZE / 2]} receiveShadow>
       <boxGeometry args={[SIZE, 0.7, 0.1]} />
       <meshStandardMaterial color={wallColor} roughness={1} metalness={0} />
     </mesh>
@@ -226,7 +270,7 @@ const Room: React.FC = () => (
     </mesh>
     
     {/* Right Wall */}
-    <mesh position={[-SIZE / 2, SIZE / 2, 0]} rotation={[0, Math.PI / 2, 0]}>
+    <mesh position={[-SIZE / 2, SIZE / 2, 0]} rotation={[0, Math.PI / 2, 0]} receiveShadow>
       <boxGeometry args={[SIZE, SIZE, 0.1]} />
       <meshStandardMaterial color={wallColor} roughness={1} metalness={0} />
     </mesh>
@@ -282,39 +326,49 @@ const Room: React.FC = () => (
     </mesh>
 
     {/* DESK */}
-    <mesh position={[-1.1, 0.5, 1.15]}>
-      <boxGeometry args={[1.1, 0.11, 0.39]} />
+    <mesh 
+      position={[-1.55, 0.8, 0.8]} // moved closer to the wall
+      receiveShadow
+    >
+      <boxGeometry args={[0.9, 0.11, 2.2]} />
       <meshStandardMaterial color={deskColor} roughness={1} metalness={0} />
     </mesh>
     {/* Desk legs */}
-    {[[-0.45, 0.2, 0.13], [0.45, 0.2, 0.13]].map(([x, y, z], i) => (
-      <mesh key={i} position={[-1.1 + x, y, 1.15 + z]}>
-        <boxGeometry args={[0.08, 0.4, 0.08]} />
+    {/* Four legs at the corners of the desk */}
+    {[
+      [-1.85, 0.4, 1.85],
+      [-1.2, 0.4, 1.85],
+      [-1.85, 0.4, -0.25],
+      [-1.2, 0.4, -0.25]
+    ].map(([x, y, z], i) => (
+      <mesh key={`desk-leg-${i}`} position={[x, y, z]}>
+        <boxGeometry args={[0.08, 0.8, 0.08]} />
         <meshStandardMaterial color={deskColor} roughness={1} metalness={0} />
       </mesh>
     ))}
+
     {/* Laptop */}
-    <mesh position={[-1.1, 0.6, 1.23]}>
-      <boxGeometry args={[0.29, 0.03, 0.17]} />
+    <mesh position={[-1.05, 1.2, 1.23]}>
+      <boxGeometry args={[0.35, 0.03, 0.5]} />
       <meshStandardMaterial color={laptop} roughness={1} metalness={0} />
     </mesh>
     {/* Lamp */}
-    <mesh position={[-0.78, 0.63, 1.34]}>
+    <mesh position={[0, 4, 0]}>
       <sphereGeometry args={[0.08, 18, 18]} />
       <meshStandardMaterial color={lampShade} emissive={lampShade} emissiveIntensity={0.5} />
     </mesh>
     {/* Mug */}
-    <mesh position={[-1.32, 0.6, 1.38]}>
+    <mesh position={[-1.32, 1.25, 1.38]}>
       <cylinderGeometry args={[0.05, 0.05, 0.07, 14]} />
       <meshStandardMaterial color={mugColor} roughness={1} metalness={0} />
     </mesh>
 
     {/* Plant */}
-    <mesh position={[0, 0.13, 0]}>
+    <mesh position={[-1.4, 1.25, 0.4]}>
       <cylinderGeometry args={[0.08, 0.08, 0.13, 16]} />
       <meshStandardMaterial color={plantPot} roughness={1} metalness={0} />
     </mesh>
-    <mesh position={[0, 0.22, 0]}>
+    <mesh position={[-1.4, 1.4, 0.4]}>
       <sphereGeometry args={[0.12, 14, 14]} />
       <meshStandardMaterial color={plantLeaf} roughness={1} metalness={0} />
     </mesh>
