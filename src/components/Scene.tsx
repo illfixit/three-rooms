@@ -7,7 +7,7 @@ import { OrthographicCamera } from "@react-three/drei";
 
 const Scene: React.FC = () => (
   <Canvas className="w-full h-screen" shadows>
-    <ambientLight intensity={0.7} />
+    <ambientLight intensity={0.3} />
     <directionalLight position={[8, 12, 8]} intensity={1} castShadow />
     {/* Place camera at a 3-corner iso view */}
     <OrthographicCamera
@@ -19,7 +19,7 @@ const Scene: React.FC = () => (
   maxAzimuthAngle={Math.PI} minAzimuthAngle={-Math.PI}
   enableRotate={true} 
     />
-    <axesHelper args={[6]} />
+    { /* <axesHelper args={[6]} /> */ }
     <Room />
   </Canvas>
 );
