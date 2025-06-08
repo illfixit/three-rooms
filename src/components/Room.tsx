@@ -4,6 +4,8 @@ import * as THREE from "three";
 import Cat from "./Cat";
 import Laptop from "./Laptop";
 import Chair from "./Chair";
+import Fireplace from "./Fireplace";
+import Shelf from "./Shelf";
 
 // COLORS
 const wallColor = "#c87e77";
@@ -386,8 +388,21 @@ const Room: React.FC = () => (
       <sphereGeometry args={[0.12, 14, 14]} />
       <meshStandardMaterial color={plantLeaf} roughness={1} metalness={0} />
     </mesh>
+
+    {/* SHELF ABOVE DESK */}
+    {/* <Shelf
+      position={[-1.88, 1.8, 1]}
+      rotation={[0, -Math.PI/2, 0]}
+      size={1}
+    /> */}
+
     {/* CAT */}
     <Cat position={[1.15, 0.6, 0.65]} />
+
+    {/* FIREPLACE */}
+    <Fireplace position={[-1.4, 0, -1.4]}
+    rotation={[0, Math.PI / 3, 0]}
+    size={1} />
   </>
 );
 
